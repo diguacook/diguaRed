@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScaleImageView">
+        <attr name="scale">
+            <enum name="sixteen_and_nine" value="0"/>
+            <enum name="four_and_three" value="1"/>
+            <enum name="two_point_five" value="2"/>
+            <enum name="three_point_eight_five" value="3"/>
+        </attr>
+        <attr name="src_image" format="reference"/>
+    </declare-styleable>
+</resources>

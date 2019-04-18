@@ -105,7 +105,7 @@ public class SpecialView extends View {
 
 //        path.addCircle(400,400,200, Path.Direction.CW);
 //        path.addCircle(400,440,160, Path.Direction.CCW);
-        path.setFillType(Path.FillType.EVEN_ODD);
+        path.setFillType(Path.FillType.WINDING);
         path.addOval(300,560,500,600, Path.Direction.CW);
         canvas.drawPath(path,paint);
         int startAngle = 0;

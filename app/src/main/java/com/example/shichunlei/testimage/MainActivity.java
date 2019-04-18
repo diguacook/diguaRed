@@ -1,5 +1,7 @@
 package com.example.shichunlei.testimage;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
@@ -30,17 +32,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<String> array = new ArrayList<>();
     private int[] arr = {10, 15, 9, 23, 5, 67, 33};
     private DemoAdapter demoAdapter;
+    private View view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rv = (RecyclerView) findViewById(R.id.rv);
+        view = findViewById(R.id.cv);
         demoAdapter = new DemoAdapter(this,list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(demoAdapter);
+//        view.animate()
+//                .rotation(180)
+//                .setDuration(5000)
+//                .setStartDelay(1000)
+//                .start();
 
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view,"bottomFlip",30);
+        objectAnimator.setDuration(1000).setStartDelay(100);
+
+        ObjectAnimator degree = ObjectAnimator.ofFloat(view,"degree",360);
+        degree.setDuration(3000).setStartDelay(100);
+
+        ObjectAnimator top = ObjectAnimator.ofFloat(view,"topFlip",-30);
+        degree.setDuration(3000).setStartDelay(100);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playSequentially(objectAnimator,degree,top);
+        animatorSet.start();
     }
 
     @Override

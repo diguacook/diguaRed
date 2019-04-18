@@ -21,6 +21,10 @@ public class CameraView extends View {
     private static final int IMAGE_WIDTH = 500;
     private static final int IMAGE_PADDING = 100;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    public float bottomFlip = 0;
+    public float degree = 0;
+    public float topFlip= 0;
+
 
     public CameraView(Context context) {
         super(context);
@@ -36,23 +40,66 @@ public class CameraView extends View {
 
     {
         bitmap = Utils.getBitmap(getResources(),IMAGE_WIDTH);
-        camera.rotate(0,-10,0);
 
     }
     private float height = bitmap.getHeight();
+
+    public float getBottomFlip() {
+        return bottomFlip;
+    }
+
+    public void setBottomFlip(float bottomFlip) {
+        this.bottomFlip = bottomFlip;
+        invalidate();
+    }
+
+    public float getDegree() {
+        return degree;
+    }
+
+    public void setDegree(float degree) {
+        this.degree = degree;
+        invalidate();
+    }
+
+    public float getTopFlip() {
+        return topFlip;
+    }
+
+    public void setTopFlip(float topFlip) {
+        this.topFlip = topFlip;
+        invalidate();
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Log.d("x+y+z:",camera.getLocationX()+","+camera.getLocationY()+","+camera.getLocationZ());
+
         canvas.save();
-        canvas.clipRect(IMAGE_PADDING,IMAGE_PADDING,IMAGE_PADDING+IMAGE_WIDTH/2,IMAGE_PADDING+height);
+        canvas.translate(IMAGE_PADDING+IMAGE_WIDTH/2,IMAGE_PADDING+height/2);
+        canvas.rotate(-degree);
+        camera.save();
+        camera.rotateX(topFlip);
+        camera.applyToCanvas(canvas);
+        camera.restore();
+        canvas.clipRect(-IMAGE_WIDTH,-IMAGE_WIDTH,IMAGE_WIDTH,0);
+        canvas.rotate(degree);
+        canvas.translate(-(IMAGE_PADDING+IMAGE_WIDTH/2),-(IMAGE_PADDING+height/2));
         canvas.drawBitmap(bitmap,IMAGE_PADDING,IMAGE_PADDING,paint);
         canvas.restore();
+
+
         canvas.save();
-//        canvas.translate( 0,-IMAGE_PADDING-height/2);
-        canvas.clipRect(IMAGE_PADDING+IMAGE_WIDTH/2,IMAGE_PADDING,IMAGE_PADDING+IMAGE_WIDTH,IMAGE_PADDING+height);
+        canvas.translate(IMAGE_PADDING+IMAGE_WIDTH/2,IMAGE_PADDING+height/2);
+        canvas.rotate(-degree);
+        camera.save();
+        camera.rotateX(bottomFlip);
         camera.applyToCanvas(canvas);
+        camera.restore();
+        canvas.clipRect(-IMAGE_WIDTH,0,IMAGE_WIDTH,IMAGE_WIDTH);
+        canvas.rotate(degree);
+        canvas.translate(-(IMAGE_PADDING+IMAGE_WIDTH/2),-(IMAGE_PADDING+height/2));
         canvas.drawBitmap(bitmap,IMAGE_PADDING,IMAGE_PADDING,paint);
         canvas.restore();
 

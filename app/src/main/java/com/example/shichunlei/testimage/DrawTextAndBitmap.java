@@ -90,10 +90,13 @@ public class DrawTextAndBitmap extends View {
             float textTop = textY + fontMetrics.top;
             float textBottom = textY + fontMetrics.bottom;
             if (textBottom > BITMAP_TOP && textBottom <= BITMAP_TOP + 200) {
+                //计算左侧上半部分需要绘制文字的宽度
                 useableWidth = getWidth() / 2 - (float) Math.sqrt(Math.pow(200.00, 2) - Math.pow(200 + BITMAP_TOP - textBottom, 2));
             } else if (textTop >= BITMAP_TOP + 200 && textTop < BITMAP_TOP + 400) {
+                //计算左侧下半部分需要绘制文字的宽度
                 useableWidth = getWidth() / 2 - (float) Math.sqrt(Math.pow(200.00, 2) - Math.pow(textTop - BITMAP_TOP-200, 2));
             } else if (textBottom > BITMAP_TOP + 200 &&textTop < BITMAP_TOP + 200) {
+                //当圆的横向直径在文字的中间即上下线
                 useableWidth = getWidth() / 2 - 200;
             } else if(textBottom <= BITMAP_TOP || textTop >= BITMAP_TOP+400){
                 useableWidth = getWidth();
@@ -102,6 +105,7 @@ public class DrawTextAndBitmap extends View {
             }
             count = textPaint.breakText(text, i, text.length(), true, useableWidth, measureWidth);
             canvas.drawText(text, i, i + count, 0, textY, textPaint);
+            //此处判断绘制宽度是否绘制满，如果没有，则继续画第二段
             if (useableWidth != getWidth()) {
                 tempCount = textPaint.breakText(text, count, text.length(), true, useableWidth, measureWidth);
                 canvas.drawText(text, i + count, tempCount + i + count, getWidth() -useableWidth, textY, textPaint);

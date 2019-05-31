@@ -18,3 +18,6 @@
     横竖屏切换
     
   4 activity 四种启动模式 standard singleTop singleTask singleInstance
+    singleTask 如果未设置不同的taskAffinity 则还是在原来的task启动，反之在新的task里面启动activity
+    
+  5.

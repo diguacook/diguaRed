@@ -16,3 +16,5 @@
        
   3 activity 异常重开 onPause onsavestate(保存状态) onStop onDestory oncreate onStart onRestore(恢复状态) onResume
     横竖屏切换
+    
+  4 activity 四种启动模式 standard singleTop singleTask singleInstance

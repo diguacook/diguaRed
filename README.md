@@ -21,3 +21,11 @@
     singleTask 如果未设置不同的taskAffinity 则还是在原来的task启动，反之在新的task里面启动activity
     
   5.如何加载一张大图？ 先通过inJustDecodeBound = true,禁止分配内存，再做图片压缩，inSampleSize压缩参数
+    LruCache可缓存数据
+
+  6.Rxjava用了方法注解跟参数注解的方式，注解的底层实现是动态代理
+    注解可分为类注解 方法注解 参数注解 变量注解
+  
+  7.HandlerThread是Thread子类，内部自带Looper,可重复使用线程，减小开销，如果线程比较耗时，则后续操作会延迟
+  
+  8.

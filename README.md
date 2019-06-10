@@ -28,4 +28,4 @@
   
   7.HandlerThread是Thread子类，内部自带Looper,可重复使用线程，减小开销，如果线程比较耗时，则后续操作会延迟
   
-  8.<include>  <ViewStub> <merge>不同的使用场景
+  8.include  ViewStub merge不同的使用场景

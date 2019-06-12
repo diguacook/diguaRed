@@ -28,4 +28,8 @@
   
   7.HandlerThread是Thread子类，内部自带Looper,可重复使用线程，减小开销，如果线程比较耗时，则后续操作会延迟
   
-  8.include  ViewStub merge不同的使用场景
+  8.include 引入公共布局，实现布局模块化
+    ViewStub  默认不展示不占位，解析布局的时候节省cpu和内存， 适合 网络失败布局 进度布局
+    merge 布局顶节点是framelayout且不需要设置background，padding等属性
+          某布局作为子布局被其他布局include时，使用merge当作该布局的顶节点，这样在被引入时顶结点会自动被忽略，而将其子节点全部合并到主布局中
+    不同的使用场景
